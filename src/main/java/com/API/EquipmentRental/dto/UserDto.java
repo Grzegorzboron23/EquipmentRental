@@ -1,34 +1,26 @@
-package com.API.EquipmentRental.model;
+package com.API.EquipmentRental.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users_equipment_rental")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserDto {
 
-    @Id
-    @GeneratedValue
-    @Column(nullable = false, unique = true)
+    @NotNull
     private UUID id;
 
-    @Column(nullable = false)
     @NotBlank
     private String username;
 
-    @Column(nullable = false, unique = true)
-    @Email
     @NotBlank
     private String email;
 
