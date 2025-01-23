@@ -10,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "equipment")
@@ -36,4 +37,7 @@ public class Equipment {
     @Min(value = 1, message = "Price must be greater than zero")
     @NotNull
     private BigDecimal price;
+
+    @ManyToMany(mappedBy = "equipment")
+    List<User> user;
 }

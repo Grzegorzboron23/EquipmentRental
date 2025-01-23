@@ -34,7 +34,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
         Pageable pageable = getPageable(page, "price", Sort.Direction.DESC);
         List<Equipment> equipmentList = equipmentRepository
-                .findEquipmentByPriceGreaterThanEqual(price, pageable)
+                .findByPriceGreaterThanEqual(price, pageable)
                 .toList();
 
         return getEquipmentDtos(equipmentList);
@@ -46,7 +46,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
         Pageable pageable = getPageable(page, "price", Sort.Direction.ASC);
         List<Equipment> equipmentList = equipmentRepository
-                .findEquipmentByPriceLessThanEqual(price, pageable)
+                .findByPriceLessThanEqual(price, pageable)
                 .toList();
 
         return getEquipmentDtos(equipmentList);
@@ -60,7 +60,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
         Pageable pageable = getPageable(page, "name", Sort.Direction.ASC);
         List<Equipment> equipmentList = equipmentRepository
-                .findEquipmentByName(name, pageable)
+                .findByNameIgnoreCase(name, pageable)
                 .toList();
 
         return getEquipmentDtos(equipmentList);
@@ -83,7 +83,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     private PageRequest getPageable(int page, String properties, Sort.Direction direction) {
         return PageRequest
-                .of(Math.max(page, 1), PAGE_SIZE, Sort.by(direction, properties));
+                .of(Math.max(page, 0), PAGE_SIZE, Sort.by(direction, properties));
     }
 
     private void checkPrice(BigDecimal price) {
