@@ -12,9 +12,9 @@ import java.util.UUID;
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, UUID> {
 
-    Page<Equipment> findEquipmentByName(String name, Pageable pageable);
+    Page<Equipment> findByNameIgnoreCase(String name, Pageable pageable);
 
-    Page<Equipment> findEquipmentByPriceGreaterThanEqual(BigDecimal price, Pageable pageable);
+    Page<Equipment> findByPriceGreaterThanEqual(BigDecimal price, Pageable pageable);
 
-    Page<Equipment> findEquipmentByPriceLessThanEqual(BigDecimal price, Pageable pageable);
+    Page<Equipment> findByPriceLessThanEqual(BigDecimal price, Pageable pageable);
 }

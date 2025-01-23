@@ -9,3 +9,5 @@ spring:
     show-sql: true
   liquibase:
     change-log: classpath:liquibase-changelog.xml
+page:
+  size: 10

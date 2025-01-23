@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,4 +33,11 @@ public class User {
     @NotBlank
     private String email;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_equipment",
+            joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "equipmentid", referencedColumnName = "id")
+    )
+    List<Equipment> equipment;
 }
