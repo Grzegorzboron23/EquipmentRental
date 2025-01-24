@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -21,6 +22,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     User findByEmailIgnoreCase(String email);
 
     User findByUsernameIgnoreCase(String username);
+
+    Optional<User> findByUsername(String username);
 
     @Query("SELECT u FROM User u JOIN u.equipment e WHERE e.id = :equipmentId")
     Page<User> findPagedUserByEquipmentId(@Param("equipmentId") UUID equipmentId, Pageable pageable);
