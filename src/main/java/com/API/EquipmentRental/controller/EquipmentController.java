@@ -47,6 +47,4 @@ public class EquipmentController {
     public ResponseEntity<EquipmentDto> updateEquipment(@Valid EquipmentSlimDto equipmentSlimDto) {
         return ResponseEntity.ok().body(equipmentService.addOrUpdateEquipment(equipmentSlimDto));
     }
-
-
 }

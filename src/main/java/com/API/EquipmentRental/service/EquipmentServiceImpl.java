@@ -10,6 +10,8 @@ import com.API.EquipmentRental.respository.EquipmentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -53,9 +55,10 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    @Cacheable("equipment_by_name")
     public List<EquipmentDto> getEquipmentByName(int page, String name) {
         if (name.isEmpty()) {
-            throw new ResourceNotFoundException("Cannot find user with name " + name);
+            throw new ResourceNotFoundException("Cannot find equipment with name " + name);
         }
 
         Pageable pageable = getPageable(page, "name", Sort.Direction.ASC);
@@ -68,6 +71,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "equipment_by_name", allEntries = true)
     public EquipmentDto addOrUpdateEquipment(EquipmentSlimDto equipmentSlimDto) {
         Equipment equipment = equipmentRepository
                 .save(mapStructMapper.equipmentSlimDtoToEquipment(equipmentSlimDto));
