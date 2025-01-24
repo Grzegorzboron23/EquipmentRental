@@ -1,5 +1,6 @@
 package com.API.EquipmentRental.model;
 
+import com.API.EquipmentRental.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,4 +41,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "equipmentid", referencedColumnName = "id")
     )
     List<Equipment> equipment;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "password", nullable = false)
+    private String hashedPassword;
 }
