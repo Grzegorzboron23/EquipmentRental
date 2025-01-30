@@ -40,4 +40,7 @@ public class Equipment {
 
     @ManyToMany(mappedBy = "equipment")
     List<User> user;
+
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
 }
