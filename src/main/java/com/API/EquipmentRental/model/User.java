@@ -47,4 +47,7 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String hashedPassword;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 }
